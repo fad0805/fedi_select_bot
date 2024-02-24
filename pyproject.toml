@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "fedi-select-bot"
+version = "0.1.0"
+description = ""
+authors = ["fad0805 <s222y@hotmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+webpush = "^1.0.2"
+logging = "^0.4.9.6"
+lxml = "^5.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
