@@ -15,6 +15,10 @@ logger = logging.getLogger(__name__)
 
 def select(origin):
     choices = origin.split(' vs ')
+
+    if len(choices) < 2:
+        choices = origin.split(' ')
+
     return random.choice(choices)
 
 class MyListener(StreamListener):
@@ -122,9 +126,9 @@ def make_streaming():
 def main():
     set_logger()
 
-    mastodon_stream = make_streaming()
+    mastodon = make_streaming()
     logger.info("Start selectbot")
-    mastodon_stream.stream_user(reconnect_async=True)
+    mastodon.stream_user(reconnect_async=True)
 
 if __name__ == "__main__":
     main()
