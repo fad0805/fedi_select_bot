@@ -69,7 +69,7 @@ class MyListener(StreamListener):
 
         content = self.get_plain_content(status)
         self.api.status_post(
-            f'{mention} {select(content)}',
+            f'{mention}{select(content)}',
             in_reply_to_id=status['id'],
             visibility=visibility
         )
