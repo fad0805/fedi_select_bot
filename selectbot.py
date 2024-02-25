@@ -14,12 +14,12 @@ ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
 logger = logging.getLogger(__name__)
 
 def select(origin):
-    choices = origin.split(' vs ')
+    choices = origin.split('vs')
 
     if len(choices) < 2:
         choices = origin.split(' ')
 
-    return random.choice(choices)
+    return random.choice(choices).strip()
 
 class MyListener(StreamListener):
     def __init__(self, api: Mastodon):
@@ -29,15 +29,13 @@ class MyListener(StreamListener):
         self.me = self.api.account_verify_credentials()
         self.logger.info(f'I am {self.me["acct"]}')
 
-    def on_update(self, status):
-        self.handle_status(status)
-
     def on_notification(self, notification):
         if notification['type'] == 'mention':
             account = notification['account']
             status = notification['status']
             content = self.get_plain_content(status)
             self.logger.info(f'{account["acct"]} mentioned me with {content}')
+            self.handle_status(status)
         else:
             self.logger.info(f'Unhandeled notification: {notification["type"]}')
 
