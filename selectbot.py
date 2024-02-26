@@ -15,9 +15,13 @@ ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
 logger = logging.getLogger(__name__)
 
 def select(origin):
-    choices = origin.split('vs')
-
-    if len(choices) < 2:
+    if '네니오' in origin or '네아니오' in origin:
+        return random.choice(['네', '아니오'])
+    elif 'vs' in origin:
+        choices = origin.split('vs')
+    elif 'VS' in origin:
+        choices = origin.split('VS')
+    else:
         choices = origin.split(' ')
 
     return random.choice(choices).strip()
