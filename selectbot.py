@@ -4,6 +4,7 @@ import logging
 import logging.config
 import os
 import random
+import mastodon as mstdn
 from mastodon import Mastodon
 from mastodon import StreamListener
 
@@ -129,4 +130,8 @@ def main():
     mastodon.stream_user(reconnect_async=True)
 
 if __name__ == "__main__":
-    main()
+    while True:
+        try:
+            main()
+        except mstdn.errors.MastodonNetworkError:
+            pass
