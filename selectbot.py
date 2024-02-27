@@ -14,6 +14,7 @@ ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
 
 logger = logging.getLogger(__name__)
 
+
 def select(origin):
     if '네니오' in origin or '네아니오' in origin:
         return random.choice(['네', '아니오'])
@@ -25,6 +26,7 @@ def select(origin):
         choices = origin.split(' ')
 
     return random.choice(choices).strip()
+
 
 class MyListener(StreamListener):
     def __init__(self, api: Mastodon):
@@ -112,19 +114,21 @@ class MyListener(StreamListener):
 def set_logger():
     logging.config.fileConfig('logging.conf')
 
+
 def make_streaming():
-  try:
-      api = Mastodon(
-          api_base_url = 'https://daydream.ink',
-          client_id = CLIENT_KEY,
-          client_secret = CLIENT_SECRET,
-          access_token = ACCESS_TOKEN,
-      )
-      stream = MyListener(api)
-  except Exception as e:
-      logger.error(e)
-  else:
-      return stream
+    try:
+        api = Mastodon(
+            api_base_url='https://daydream.ink',
+            client_id=CLIENT_KEY,
+            client_secret=CLIENT_SECRET,
+            access_token=ACCESS_TOKEN,
+        )
+        stream = MyListener(api)
+    except Exception as e:
+        logger.error(e)
+    else:
+        return stream
+
 
 def main():
     set_logger()
@@ -132,6 +136,7 @@ def main():
     mastodon = make_streaming()
     logger.info("Start selectbot")
     mastodon.stream_user(reconnect_async=True)
+
 
 if __name__ == "__main__":
     while True:
