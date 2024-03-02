@@ -144,3 +144,5 @@ if __name__ == "__main__":
             main()
         except mstdn.errors.MastodonNetworkError:
             pass
+        except Exception as e:
+            print(e)
