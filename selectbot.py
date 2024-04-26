@@ -18,6 +18,8 @@ logger = logging.getLogger(__name__)
 def select(origin):
     if '네니오' in origin or '네아니오' in origin:
         return random.choice(['네', '아니오'])
+    elif '예아니오' in origin:
+        return random.choice(['예', '아니오'])
     elif 'vs' in origin:
         choices = origin.split('vs')
     elif 'VS' in origin:
