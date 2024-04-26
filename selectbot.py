@@ -73,6 +73,15 @@ class MyListener(StreamListener):
         )
 
         content = self.get_plain_content(status)
+
+        # Check if it's a question
+        if '?' in content:
+            self.api.status_post(
+                f'{mention}{select(content.split("?")[1])}',
+                in_reply_to_id=status['id'],
+                visibility=visibility
+            )
+
         self.api.status_post(
             f'{mention}{select(content)}',
             in_reply_to_id=status['id'],
