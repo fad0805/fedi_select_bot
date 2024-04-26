@@ -16,6 +16,9 @@ logger = logging.getLogger(__name__)
 
 
 def select(origin):
+    if '?' in origin:
+        origin = origin.split('?')[1]
+
     if '네니오' in origin or '네아니오' in origin:
         return random.choice(['네', '아니오'])
     elif '예아니오' in origin:
@@ -75,14 +78,6 @@ class MyListener(StreamListener):
         )
 
         content = self.get_plain_content(status)
-
-        # Check if it's a question
-        if '?' in content:
-            self.api.status_post(
-                f'{mention}{select(content.split("?")[1])}',
-                in_reply_to_id=status['id'],
-                visibility=visibility
-            )
 
         self.api.status_post(
             f'{mention}{select(content)}',
