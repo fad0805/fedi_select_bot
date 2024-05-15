@@ -23,7 +23,7 @@ def select(origin):
 
     if '?' in origin:
         question_mark = origin.find('?')
-        origin = origin[question_mark:]
+        origin = origin[question_mark + 1:]
 
     choices = []
     if 'vs' in origin:
