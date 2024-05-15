@@ -22,7 +22,8 @@ def select(origin):
         return random.choice(['예', '아니오'])
 
     if '?' in origin:
-        origin = origin.split('?')[1].strip()
+        question_mark = origin.find('?')
+        origin = origin[question_mark:]
 
     choices = []
     if 'vs' in origin:
