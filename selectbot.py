@@ -21,7 +21,7 @@ def select(origin):
     elif '예아니오' in origin:
         return random.choice(['예', '아니오'])
 
-    if '?' in origin and origin[:-1] != '?':
+    if '?' in origin and origin[-1:] != '?':
         question_mark = origin.find('?')
         origin = origin[question_mark + 1:]
 
