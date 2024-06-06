@@ -24,6 +24,7 @@ def select(origin):
     if '?' in origin and origin[-1:] != '?':
         question_mark = origin.find('?')
         origin = origin[question_mark + 1:]
+        origin = origin.strip()
 
     choices = []
     if 'vs' in origin:
