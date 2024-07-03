@@ -23,6 +23,9 @@ def select(origin):
 
     origin = origin.strip()
 
+    if origin.endswith('?') is False or '?' in origin:
+        origin = origin.split('?')[1]
+
     choices = []
     if 'vs' in origin:
         choices = origin.split('vs')
@@ -30,9 +33,6 @@ def select(origin):
         choices = origin.split('VS')
     else:
         choices = origin.split(' ')
-
-    if '?' in choices[0]:
-        choices[0] = choices[0].split('?')[1]
 
     print(choices)
 
