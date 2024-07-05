@@ -21,7 +21,7 @@ def select(origin):
     elif '예아니오' in origin:
         return random.choice(['예', '아니오'])
 
-    if origin.endswith('?') is False or '?' in origin:
+    if origin.endswith('?') is False and '?' in origin:
         origin = origin.split('?')[1]
 
     origin = origin.strip()

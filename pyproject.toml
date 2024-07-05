@@ -6,10 +6,11 @@ authors = ["fad0805 <s222y@hotmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 webpush = "^1.0.2"
 logging = "^0.4.9.6"
 lxml = "^5.1.0"
+mastodon-py = "^1.8.1"
 
 
 [build-system]
