@@ -4,6 +4,7 @@ import logging
 import logging.config
 import os
 import random
+import re
 import mastodon as mstdn
 from mastodon import Mastodon
 from mastodon import StreamListener
@@ -27,10 +28,13 @@ def select(origin):
     origin = origin.strip()
 
     choices = []
-    if 'vs' in origin:
-        choices = origin.split('vs')
-    elif 'VS' in origin:
-        choices = origin.split('VS')
+    if 'vs' in origin.lower():
+        idxes = [i.start() for i in re.finditer('vs', origin.lower())]
+        for i, idx in enumerate(idxes):
+            if i == 0:
+                choices.append(origin[:idx])
+            else:
+                choices.append(origin[idx + 2:])
     else:
         choices = origin.split(' ')
 
