@@ -17,17 +17,31 @@ logger = logging.getLogger(__name__)
 
 
 def select(origin):
-    pattern = re.compile(r'\d[dD]\d')
     if '네니오' in origin or '네아니오' in origin:
         return random.choice(['네', '아니오'])
     elif '예아니오' in origin:
         return random.choice(['예', '아니오'])
+
     elif re.search(r'\d[dD]\d', origin):
-        dice = pattern.search(origin)
+        origin = origin.lower().split('d')
+
+        count = ''
+        for i in reversed(origin[0]):
+            if not i.isdigit():
+                break
+            count = count + i
+
+        dice = ''
+        for i in origin[1]:
+            if not i.isdigit():
+                break
+            dice = dice + i
+
         choices = []
-        for i in range(dice.start()):
-            choices.append([i for i in range(origin[dice.end() - 1])])
-        return random.choice(choices)
+        for i in range(int(count)):
+            choices.append(str(random.choice([i for i in range(int(dice))])))
+
+        return ', '.join(choices)
 
     if origin.endswith('?') is False and '?' in origin:
         origin = origin.split('?')[1]
