@@ -17,10 +17,17 @@ logger = logging.getLogger(__name__)
 
 
 def select(origin):
+    pattern = re.compile(r'\d[dD]\d')
     if '네니오' in origin or '네아니오' in origin:
         return random.choice(['네', '아니오'])
     elif '예아니오' in origin:
         return random.choice(['예', '아니오'])
+    elif re.search(r'\d[dD]\d', origin):
+        dice = pattern.search(origin)
+        choices = []
+        for i in range(dice.start()):
+            choices.append([i for i in range(origin[dice.end() - 1])])
+        return random.choice(choices)
 
     if origin.endswith('?') is False and '?' in origin:
         origin = origin.split('?')[1]
@@ -30,7 +37,6 @@ def select(origin):
     choices = []
     if 'vs' in origin.lower():
         idxes = [i.start() for i in re.finditer('vs', origin.lower())]
-        print(idxes)
         for i, idx in enumerate(idxes):
             if i == 0:
                 choices.append(origin[:idx])
