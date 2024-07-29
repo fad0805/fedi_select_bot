@@ -56,7 +56,7 @@ def select(origin):
                 choices.append(origin[:idx])
             elif i < len(idxes):
                 choices.append(origin[idxes[i - 1] + 2:idx])
-        choices.append(origin[idx + 2:])
+            choices.append(origin[idx + 2:])
     else:
         choices = origin.split(' ')
 
