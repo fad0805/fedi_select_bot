@@ -42,7 +42,10 @@ def select(origin):
             dice_number = [i for i in range(1, int(dice) + 1)]
             choices.append(str(random.choice(dice_number)))
 
-        return ', '.join(choices)
+        result = ', '.join(choices)
+        if len(result) > 500:
+            result = '주사위를 너무 많이 굴렸습니다. 500자를 넘어가면 출력할 수 없습니다.'
+        return result
 
     if origin.endswith('?') is False and '?' in origin:
         origin = origin.split('?')[1]
