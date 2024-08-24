@@ -39,7 +39,8 @@ def select(origin):
 
         choices = []
         for i in range(int(count)):
-            choices.append(str(random.choice([i for i in range(int(dice))])))
+            dice_number = [i for i in range(1, int(dice) + 1)]
+            choices.append(str(random.choice(dice_number)))
 
         return ', '.join(choices)
 
