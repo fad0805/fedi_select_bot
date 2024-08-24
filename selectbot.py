@@ -26,7 +26,7 @@ def select(origin):
         origin = origin.lower().split('d')
 
         count = ''
-        for i in reversed(origin[0]):
+        for i in origin[0]:
             if not i.isdigit():
                 break
             count = count + i
