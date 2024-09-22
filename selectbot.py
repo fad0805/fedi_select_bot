@@ -54,13 +54,7 @@ def select(origin):
 
     choices = []
     if 'vs' in origin.lower():
-        idxes = [i.start() for i in re.finditer('vs', origin.lower())]
-        for i, idx in enumerate(idxes):
-            if i == 0:
-                choices.append(origin[:idx])
-            elif i < len(idxes):
-                choices.append(origin[idxes[i - 1] + 2:idx])
-            choices.append(origin[idx + 2:])
+        choices = origin.lower().split('vs')
     else:
         choices = origin.split(' ')
 
