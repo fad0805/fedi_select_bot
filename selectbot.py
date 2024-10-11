@@ -16,6 +16,32 @@ ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
 logger = logging.getLogger(__name__)
 
 
+def roll_dice(origin):
+    origin = origin.lower().split('d')
+
+    count = ''
+    for i in origin[0]:
+        if not i.isdigit():
+            break
+        count = count + i
+
+    dice = ''
+    for i in origin[1]:
+        if not i.isdigit():
+            break
+        dice = dice + i
+
+    choices = []
+    for i in range(int(count)):
+        dice_number = [i for i in range(1, int(dice) + 1)]
+        choices.append(str(random.choice(dice_number)))
+
+    result = ', '.join(choices)
+    if len(result) > 500:
+        result = '주사위를 너무 많이 굴렸습니다. 500자를 넘어가면 출력할 수 없습니다.'
+    return result
+
+
 def select(origin):
     if '네니오' in origin or '네아니오' in origin:
         return random.choice(['네', '아니오'])
@@ -23,29 +49,7 @@ def select(origin):
         return random.choice(['예', '아니오'])
 
     elif re.search(r'\d[dD]\d', origin):
-        origin = origin.lower().split('d')
-
-        count = ''
-        for i in origin[0]:
-            if not i.isdigit():
-                break
-            count = count + i
-
-        dice = ''
-        for i in origin[1]:
-            if not i.isdigit():
-                break
-            dice = dice + i
-
-        choices = []
-        for i in range(int(count)):
-            dice_number = [i for i in range(1, int(dice) + 1)]
-            choices.append(str(random.choice(dice_number)))
-
-        result = ', '.join(choices)
-        if len(result) > 500:
-            result = '주사위를 너무 많이 굴렸습니다. 500자를 넘어가면 출력할 수 없습니다.'
-        return result
+        return roll_dice(origin)
 
     if origin.endswith('?') is False and '?' in origin:
         origin = origin.split('?')[1]
@@ -55,6 +59,8 @@ def select(origin):
     choices = []
     if 'vs' in origin.lower():
         choices = origin.lower().split('vs')
+    elif '\n' in origin:
+        choices = origin.split('\n')
     else:
         choices = origin.split(' ')
 
