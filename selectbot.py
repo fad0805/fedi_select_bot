@@ -57,6 +57,9 @@ def select(origin):
 
     if origin.endswith('?') is False and '?' in origin:
         origin = origin.split('?')[1]
+    elif origin.count('?') > 1:
+        index = origin.find('?')
+        origin = origin[index + 1:]
 
     origin = origin.strip()
 
