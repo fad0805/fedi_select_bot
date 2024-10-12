@@ -64,6 +64,12 @@ def select(origin):
     else:
         choices = origin.split(' ')
 
+    if '' in choices:
+        choices.remove('')
+
+    if len(choices) == 0:
+        return '선택지가 없습니다.'
+
     return random.choice(choices).strip()
 
 
