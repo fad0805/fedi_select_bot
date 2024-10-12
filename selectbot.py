@@ -14,8 +14,9 @@ CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
 
 logger = logging.getLogger(__name__)
-rules = "물음표(?) 뒤에 있는 문장을 띄어쓰기나 엔터, vs로 구분해서 선택해줍니다. \
-'예아니오', '네아니오' 혹은 '네니오'가 들어있으면 ? 유무와 상관없이 네, 아니오로 대답합니다.\n \
+rules = "수행할 수 있는 명령이 없습니다. \n\n \
+물음표(?) 뒤에 있는 문장을 띄어쓰기나 엔터, vs로 구분해서 선택해줍니다. \n \
+'예아니오', '네아니오' 혹은 '네니오'가 들어있으면 ? 유무와 상관없이 네, 아니오로 대답합니다.\n\n \
 (숫자)d(숫자)로 멘션 시 주사위를 굴려줍니다."
 
 
