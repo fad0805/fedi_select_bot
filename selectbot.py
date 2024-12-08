@@ -131,7 +131,7 @@ class MyListener(StreamListener):
         self.api.status_post(
             f'{mention}{select(content)}',
             in_reply_to_id=status['id'],
-            visibility=visibility
+            visibility=visibility,
             spoiler_text=cw
         )
 
