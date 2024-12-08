@@ -118,6 +118,8 @@ class MyListener(StreamListener):
         if visibility == 'public':
             visibility = 'unlisted'
 
+        cw = status['spoiler_text']
+
         mention = ''.join(
             f'@{user["acct"]} '
             for user in [status['account']] + status['mentions']
@@ -130,6 +132,7 @@ class MyListener(StreamListener):
             f'{mention}{select(content)}',
             in_reply_to_id=status['id'],
             visibility=visibility
+            spoiler_text=cw
         )
 
     @staticmethod
